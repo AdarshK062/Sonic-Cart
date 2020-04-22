@@ -96,34 +96,23 @@ module.exports = function(async, Product, _, Users, Cart, Like ){
                 },
                 function(callback){
                     if(req.body.cart){
-                        Cart.find({'Pid': req.body.id},
-	          function(err, result) {
-                            if (err) throw err;
-                            if(result.length==0){
                                 const cart=new Cart();
                                 cart.Cid=req.user._id;
                                 cart.Pid=req.body.id;
                                 cart.save((err, msg) => {
                                     callback(err, msg);
                                 })
-                            }
-                        });
                     }
                 },
                 function(callback){
                     if(req.body.like){
-                        Like.find({'Pid': req.body.id},
-	       function(err, result) {
-                            if (err) throw err;
-                                if(result.length==0){
                                 const like=new Like();
                                 like.Cid=req.user._id;
                                 like.Pid=req.body.id;
                                 like.save((err, msg) => {
                                     callback(err, msg);
                                 })
-                            }
-                        });
+                            
                     }
                     
                 }
