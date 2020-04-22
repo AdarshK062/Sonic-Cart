@@ -43,7 +43,7 @@
         <form action="/results" method="post">
             <div class="form-group ad-30" style="margin-top:8px;">
                 <div class="input-group search-style">
-                    <input class="form-control new-search-bar"  name="clubName" id="search" placeholder="Enter Your Club Name" type="text">
+                    <input class="form-control new-search-bar"  name="clubName" id="search" placeholder="Enter Product Name" type="text">
                     <span class="input-group-btn">
                         <button class="btn input-btn" type="" id="search-form">Search</button>
                     </span>
@@ -68,7 +68,7 @@
                                             </p>
                                             <hr/>
                                             <select class="form-control" name="country" id="country" >
-                                                <option value="">Filter By Class</option>
+                                                <option value="">Filter By Category</option>
                                             </select>
                                             <div class="clearfix"></div>
                                             <button class="btn add-apply">Apply</button>
@@ -87,9 +87,9 @@
                                     <% _.forEach(val, function(val2) { %>
                                         <form action="/home" method="post" id="favorite">
                                             <div class="item col-md-4">
-                                                <a style="text-decoration:none" href="/product/<%= val2.name %>">
-                                                    <div class="thumbnail" style="border: 1px solid #1f2833;">
-                                                        <img src="/uploads/<%= val2.image %>" alt="">
+                                                <a style="text-decoration: none" href="/product/<%= val2.name.replace(/ /g,'-') %>">
+                                                    <div class="thumbnail">
+                                                        <img src="/uploads/<%= val2.image %>" class="thumbimg" alt="">
                                                         <div class="caption">
                                                             <h4><b><%= val2.name %></b></h4>
                                                             <div class="row" style="float:right; margin-right:10px;">
