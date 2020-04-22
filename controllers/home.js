@@ -96,12 +96,8 @@ module.exports = function(async, Product, _, Users, Cart, Like ){
                 },
                 function(callback){
                     if(req.body.cart){
-                        Cart.find({
-                            '$and':[
-                                {'Pid': req.body.id},
-                                {'Cid': req.user._id}
-                            ]
-                        }, function(err, result) {
+                        Cart.find({'Pid': req.body.id},
+	          function(err, result) {
                             if (err) throw err;
                             if(result.length==0){
                                 const cart=new Cart();
@@ -116,12 +112,8 @@ module.exports = function(async, Product, _, Users, Cart, Like ){
                 },
                 function(callback){
                     if(req.body.like){
-                        Like.find({
-                            '$and':[
-                                {'Pid': req.body.id},
-                                {'Cid': req.user._id}
-                            ]
-                        }, function(err, result) {
+                        Like.find({'Pid': req.body.id},
+	       function(err, result) {
                             if (err) throw err;
                                 if(result.length==0){
                                 const like=new Like();
