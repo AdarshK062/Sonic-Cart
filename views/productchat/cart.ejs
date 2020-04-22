@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sonic-Cart</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+
+<body style="background-color: #84ceeb;">
+    <%- include ../partials/navbar.ejs %>
+    <% var bill=parseInt(0); %>
+    <div class="col-md-12">
+        <input type="hidden" id="name-user" value="<%= user.username %>">
+        <input type="hidden" id="name-image" value="<%= user.userImage %>">
+        <div class="">
+            <div class="row">
+                <div class="col-md-9">
+                    <div>
+                        <% _.forEach(chunks, function(val) { %>
+                            <div class="category-list">
+                                <div class="row">
+                                    <% _.forEach(val, function(val2) { %>
+                                        <form action="/home" method="post" id="favourite">
+                                            <div class="item col-md-4">
+                                                <a style="text-decoration: none" href="/product/<%= val2.Pid.name.replace(/ /g,'-') %>">
+                                                    <div class="thumbnail">
+                                                        <img src="/uploads/<%= val2.Pid.image %>" class="thumbimg" alt="">
+                                                        <div class="caption">
+                                                            <h4><b><%= val2.Pid.name %></b></h4>
+                                                            <div class="row" style="float:right; margin-right:10px;">
+                                                                <p style="font-size: 12px;">
+                                                                    <%= val2.Pid.category %><br>
+                                                                    Rs: <%= val2.Pid.cost %>/-
+                                                                    <% bill+=parseInt(val2.Pid.cost);%>
+                                                                </p>
+                                                            </div>
+                                                            <div style="float: left; position: absolute;">
+                                                                <input type="hidden" name="id" id="id" value="<%= val2.Pid._id %>">
+                                                                <input type="hidden" name="clubName" id="product_Name" value="<%= val2.Pid.name %>">
+                                                                <button id="like" class="btn">
+                                                                    <i class="fa fa-heart-o" style="color:#27282c !important"></i>(<%=val2.Pid.likes.length%>)
+                                                                </button>
+                                                                <button id="cart" class="btn">
+                                                                    <i class="fa fa-shopping-cart" style="color:#27282c !important"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </form>
+                                    <% })%>
+                                </div>
+                            </div>
+                        <% })%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="align-content: center;align-self: center; align-items: center; float:right; border: 1px solid black;border-radius: 10px; margin-right: 46%; background-color: rgb(248, 243, 196); padding: 30px 30px 30px 30px;">
+        Total Bill= <%=bill%><br><br>
+        <button style="align-self: center;">Buy Now</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/global.js"></script>
+    <script src="/js/deparam.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>
