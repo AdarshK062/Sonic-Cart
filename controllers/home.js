@@ -74,7 +74,6 @@ module.exports = function(async, Product, _, Users, Cart, Like ){
             // ], (err, results) => {
             //         likes = results[0];
             //     });
-            console.log('hi',likes);
             async.parallel([
                 function(callback){
                     if(req.body.like){
