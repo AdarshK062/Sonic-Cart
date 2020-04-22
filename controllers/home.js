@@ -47,33 +47,6 @@ module.exports = function(async, Product, _, Users, Cart, Like ){
         },
 
         postHomePage: function(req, res){
-            var likes;
-            var carts;
-            Like.find({
-                '$or':[
-                    {'Pid': req.body.id},
-                    {'Cid': req.user._id}
-                ]
-            }, function(err, result) {
-                if (err) throw err;
-                likes=result;
-                //console.log(result);
-              });
-            // async.parallel([
-            //     function(callback){
-            //         Like.find({
-            //             '$or':[
-            //                 {'Pid': req.body.id},
-            //                 {'Cid': req.user._id}
-            //             ]
-            //         })
-            //         .exec( (err, result) => {
-            //             callback(err, result);
-            //         });
-            //     }
-            // ], (err, results) => {
-            //         likes = results[0];
-            //     });
             async.parallel([
                 function(callback){
                     if(req.body.like){

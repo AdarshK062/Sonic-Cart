@@ -13,7 +13,7 @@ module.exports = function(async, Product, Users) {
             async.parallel([
                 function(callback){
                     const regex = new RegExp((req.body.country), 'gi');
-                    Product.find({'$or': [{'country':regex}, {'name': regex}]}, (err, result) => {
+                    Product.find({'$or': [{'category':regex}, {'name': regex}]}, (err, result) => {
                        callback(err, result); 
                     });
                 }
